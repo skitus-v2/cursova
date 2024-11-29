@@ -15,7 +15,13 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@capacitor/camera": "^6.1.1",
+    "@capacitor/geolocation": "^6.0.2",
+    "@capacitor/local-notifications": "^6.1.1",
+    "@capacitor/push-notifications": "^6.0.3",
+    "@capacitor/storage": "^1.2.5",
     "@expo/vector-icons": "^14.0.2",
+    "@react-native-community/progress-bar-android": "^1.0.5",
     "@react-navigation/bottom-tabs": "^7.0.0",
     "@react-navigation/native": "^7.0.0",
     "expo": "~52.0.11",

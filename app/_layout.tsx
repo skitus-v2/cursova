@@ -1,39 +1,24 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import * as React from 'react';
+import { NavigationContainer, NavigationIndependentTree } from '@react-navigation/native'; // Убираем NavigationIndependentTree
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import MainActivity from '@/components/MainActivity';
+import WaterInputActivity from '@/components/WaterInputActivity';
+import StatisticsActivity from '@/components/StatisticsActivity'; // Добавляем экран статистики
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+const Stack = createNativeStackNavigator();
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
+const App = () => {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <NavigationIndependentTree>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="MainActivity">
+        <Stack.Screen name="MainActivity" component={MainActivity} />
+        <Stack.Screen name="WaterInputActivity" component={WaterInputActivity} />
+        <Stack.Screen name="StatisticsActivity" component={StatisticsActivity} />
+      </Stack.Navigator>
+    </NavigationContainer>
+    </NavigationIndependentTree>
   );
-}
+};
+
+export default App;
